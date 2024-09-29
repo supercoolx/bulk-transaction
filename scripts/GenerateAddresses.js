@@ -5,7 +5,7 @@ const fs = require('fs');
 async function generateAddresses() {
   let addresses = [];
 
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < 100000; i++) {
     console.log(i);
     // Generate a random wallet
     const wallet = ethers.Wallet.createRandom();
@@ -14,7 +14,7 @@ async function generateAddresses() {
     addresses.push({
       address: wallet.address,
       privateKey: wallet.privateKey, // Optionally, you can store the private key
-      amount: '10000000000000000000'
+      amount: '1000000000000000000'
     });
   }
 

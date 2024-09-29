@@ -1,0 +1,17 @@
+{
+  "name": "hardhat-project",
+  "scripts": {
+    "generate": "npx hardhat run ./scripts/GenerateAddresses.js",
+    "deploy": "npx hardhat run ./scripts/deploy.js",
+    "test": "npx hardhat test",
+    "start": "npx hardhat run ./scripts/run.js"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "hardhat": "^2.22.12"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.0.2",
+    "dotenv": "^16.4.5"
+  }
+}

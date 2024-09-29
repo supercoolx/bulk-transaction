@@ -17,13 +17,21 @@ async function main() {
     // await approvalTx.wait();
     // console.log('Approved successfully. Transaction hash:', approvalTx.transactionHash);
 
+    // const transferTx = await BatchTransfer.batchTransfer(
+    //     meowAddress,
+    //     accounts.map(a => a.address),
+    //     accounts.map(a => a.amount)
+    // );
+    // await transferTx.wait();
+    // console.log('Transfered successfully. Transaction hash:', transferTx.transactionHash);
+
     const gasEstimate = await BatchTransfer.batchTransfer.estimateGas(
         meowAddress,
         accounts.map(a => a.address),
         accounts.map(a => a.amount)
     );
     
-    console.log(`Estimated gas for batch transfer: ${gasEstimate.toString()}`);
+    // console.log(`Estimated gas for batch transfer: ${gasEstimate.toString()}`);
 }
 
 main()

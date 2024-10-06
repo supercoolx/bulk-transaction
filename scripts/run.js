@@ -32,32 +32,36 @@ async function main() {
     const balance = await Token.balanceOf(ownerAddress);
     console.log('Token Balance:', ethers.formatEther(balance));
 
+    const needToken = BigInt('100000000');
+
     const allowance = await Token.allowance(ownerAddress, contractAddress);
     console.log('Token Allowance:', ethers.formatEther(allowance));
 
-    if (allowance < BigInt(amount) * BigInt(wallets.length) * BigInt('1000000000000000000')) {
-        const allowanceAmount = amount * wallets.length;
-        console.log(`Insufficient allowance. Approving ${allowanceAmount} ...`);
+    if (allowance < needToken * BigInt('1000000000000000000')) {
+        console.log(`Insufficient allowance. Approving ${needToken.toString()} ...`);
 
-        const approvalTx = await Token.approve(contractAddress, ethers.parseEther(allowanceAmount.toString()));
+        const approvalTx = await Token.approve(contractAddress, ethers.parseEther(needToken.toString()));
         await approvalTx.wait();
         console.log('Approved successfully. Transaction hash:', approvalTx.transactionHash);
     }
 
     for(let i = 0; i < wallets.length; i += countAtOnce) {
         let addresses = wallets.slice(i, i + countAtOnce).map(w => w.address);
+        let amounts = wallets.slice(i, i + countAtOnce).map(w => BigInt(w.amount) * BigInt('1000000000000000000'));
         let output = addresses.map((address, index) => `${i + index} ${address}\n`);
         
         try {
             let transferTx = await BatchTransfer.batchTransfer(
                 tokenAddress,
                 addresses,
-                new Array(countAtOnce).fill(BigInt(amount) * BigInt('1000000000000000000'))
+                // new Array(countAtOnce).fill(BigInt(amount) * BigInt('1000000000000000000'))
+                amounts
             );
             await transferTx.wait();
             console.log(...output);
             fs.appendFileSync(successAddressesFilePath, output.join(''));
         } catch (err) {
+            console.log("error=", err.message);
             fs.appendFileSync(failAddressesFilePath, output.join(''));
         }
 

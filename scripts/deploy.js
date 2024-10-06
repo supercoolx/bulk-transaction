@@ -15,16 +15,25 @@ async function main() {
     console.log("BatchTransfer contract deployed to:", address);
 
     let data;
-    const path = "./results/deployments.json";
+    const path = "./jsons/deployments.json";
 
     if (fs.existsSync(path)) {
         // Read and parse the JSON file
         const fileContent = fs.readFileSync(path, 'utf-8');
         data = JSON.parse(fileContent);
     } else {
-        data = {};
+        data = {
+            testnet: {
+                contract: "",
+                token: ""
+            },
+            mainnet: {
+                contract: "",
+                token: ""
+            }
+        };
     }
-    data[`${network}`] = address;
+    data[`${network}`]["contract"] = address;
 
     fs.writeFileSync(path, JSON.stringify(data, null, 2));
 }

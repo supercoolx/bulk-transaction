@@ -63,6 +63,11 @@ async function main() {
         } catch (err) {
             console.log("error=", err.message);
             fs.appendFileSync(failAddressesFilePath, output.join(''));
+
+            let delay = () => new Promise((res, rej) => {
+                setTimeout(res, 5000);
+            });
+            await delay();
         }
 
     }

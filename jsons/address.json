@@ -2,5 +2,9 @@
   "testnet": {
     "contract": "0xa2aD242Cad7306998C433DDa032d3CCFa6319c2A",
     "token": "0x10C10Bc11C2bdaA2d73BD587873cF1512F3E373D"
+  },
+  "mainnet": {
+    "contract": "0xB6D2A32bFAA042418eC7f73EBAc00aeFE7E65116",
+    "token": "0x57E7eFe18677A88Db2B449dCDEdc700d82E0c989"
   }
 }

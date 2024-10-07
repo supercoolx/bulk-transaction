@@ -15,7 +15,7 @@ async function main() {
     console.log("BatchTransfer contract deployed to:", address);
 
     let data;
-    const path = "./jsons/deployments.json";
+    const path = "./jsons/address.json";
 
     if (fs.existsSync(path)) {
         // Read and parse the JSON file
